@@ -1,4 +1,5 @@
 .bundle
-docs
+.yardoc
+doc
 pkg
 vendor/bundle
