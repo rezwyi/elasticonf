@@ -60,15 +60,9 @@ describe ElastiConf do
     end
   end
 
-  describe '#configure' do
-    before do
-      subject.configure do |config|
-        config.config_root = '/config'
-        config.const_name = 'AppSettings'
-      end
+  describe '#root' do
+    its(:root) do
+      should eql(Pathname.new(File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))))
     end
-
-    its(:config_root) { should eql(Pathname('/config')) }
-    its(:const_name) { should eql('AppSettings') }
   end
 end
