@@ -111,4 +111,46 @@ describe ElastiConf do
       should eql(Pathname.new(File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))))
     end
   end
+
+  describe '#load!' do
+    before do
+      subject.configure do |config|
+        config.config_root = ElastiConf.root.join('spec', 'fixtures')
+        config.config_file = 'application'
+        config.const_name = 'AppSettings'
+      end
+    end
+
+    it 'should not raise an error' do
+      expect { subject.load! }.not_to raise_error
+    end
+
+    it 'should load some configuration' do
+      subject.load!
+      expect(AppSettings.some_config.int_key).to eql(1)
+    end
+
+    it 'should load some configuration' do
+      subject.load!
+      expect(AppSettings.some_config.str_key).to eql('1')
+    end
+
+    context 'when some env given' do
+      let(:env) { :test }
+      
+      it 'should not raise an error' do
+        expect { subject.load!(env) }.not_to raise_error
+      end
+
+      it 'should load some configuration' do
+        subject.load! env
+        expect(AppSettings.some_config.int_key).to eql(2)
+      end
+
+      it 'should load some configuration' do
+        subject.load! env
+        expect(AppSettings.some_config.str_key).to eql('2')
+      end
+    end
+  end
 end
