@@ -5,7 +5,7 @@ module ElastiConf
     end
 
     def reset_config!
-      %w(config_root const_name).each do |v|
+      %w(config_root config_file const_name).each do |v|
         instance_variable_set "@#{v}", nil
       end
     end
@@ -19,6 +19,17 @@ module ElastiConf
         raise ArgumentError, "String or Pathname expected #{value.class} given"
       end
       @config_root = value.is_a?(String) ? Pathname.new(value.to_s) : value
+    end
+
+    def config_file
+      @config_file ||= 'config'
+    end
+
+    def config_file=(value)
+      unless [String, Symbol].include?(value.class)
+        raise ArgumentError, "String or Symbol expected #{value.class} given"
+      end
+      @config_file = value
     end
 
     def const_name
