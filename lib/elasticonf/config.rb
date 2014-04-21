@@ -27,7 +27,7 @@ module ElastiConf
 
     def const_name=(value)
       unless [String, Symbol].include?(value.class)
-        raise ArgumentError, "String expected #{value.class} given"
+        raise ArgumentError, "String or Symbol expected #{value.class} given"
       end
       @const_name = value.to_s
     end
