@@ -5,15 +5,30 @@ Powerfull and flexible application config solution worked in any ruby program. N
 
 ## Installation
 
-Will be available soon.
+First add the following lines to your application `Gemfile`:
+
+``` ruby
+gem 'elasticonf', '~> 1.0.0.beta'
+```
+
+Then run `bundle install` to update your's gems bundle.
 
 ## Configuration
 
 Will be available soon.
 
-## Testing
+## Documentation
 
 Will be available soon.
+
+## Testing
+
+Run this commands in terminal:
+
+0. `cd some/path`
+0. `git clone git@github.com:rezwyi/elasticonf.git`
+0. `cd elasticonf/`
+0. `bin/rspec`
 
 ## Versioning
 
