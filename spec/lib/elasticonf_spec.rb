@@ -9,12 +9,14 @@ describe ElastiConf do
         config.config_root = '/config'
         config.config_file = 'application'
         config.const_name = 'AppSettings'
+        config.raise_if_already_initialized_constant = false
       end
     end
 
     its(:config_root) { should eql(Pathname('/config')) }
     its(:config_file) { should eql('application') }
     its(:const_name) { should eql('AppSettings') }
+    its(:raise_if_already_initialized_constant) { should be_false }
   end
 
   describe '#reset_config!' do
@@ -22,6 +24,7 @@ describe ElastiConf do
 
     its(:config_file) { should eql('config') }
     its(:const_name) { should eql('Settings') }
+    its(:raise_if_already_initialized_constant) { should be_true }
 
     it 'should raise an error' do
       expect { subject.config_root }.to raise_error
@@ -57,8 +60,9 @@ describe ElastiConf do
     its(:config_file) { should eql('config') }
 
     it 'should return some value' do
-      subject.config_file = 'application'
-      subject.config_file.should eql('application')
+      expect {
+        subject.config_file = 'application'
+      }.to change(subject, :config_file).to('application')
     end
 
     context 'when wrong argument given' do
@@ -106,6 +110,48 @@ describe ElastiConf do
     end
   end
 
+  describe '#raise_if_already_initialized_constant' do
+    its(:raise_if_already_initialized_constant) { should be_true }
+
+    it 'should change to false' do
+      expect {
+        subject.raise_if_already_initialized_constant = false
+      }.to change(subject, :raise_if_already_initialized_constant).to(false)
+    end
+
+    context 'when wrong argument given' do
+      it 'should raise an error' do
+        expect {
+          subject.raise_if_already_initialized_constant = 'some_string'
+        }.to raise_error
+      end
+
+      it 'should raise an error' do
+        expect {
+          subject.raise_if_already_initialized_constant = :some_symbol
+        }.to raise_error
+      end
+      
+      it 'should raise an error' do
+        expect {
+          subject.raise_if_already_initialized_constant = -> {}
+        }.to raise_error
+      end
+
+      it 'should raise an error' do
+        expect {
+          subject.raise_if_already_initialized_constant = {}
+        }.to raise_error
+      end
+
+      it 'should raise an error' do
+        expect {
+          subject.raise_if_already_initialized_constant = []
+        }.to raise_error
+      end
+    end
+  end
+
   describe '#root' do
     its(:root) do
       should eql(Pathname.new(File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))))
@@ -117,9 +163,15 @@ describe ElastiConf do
       subject.configure do |config|
         config.config_root = ElastiConf.root.join('spec', 'fixtures')
         config.config_file = 'application'
-        config.const_name = 'AppSettings'
+        config.const_name = const_name
       end
     end
+
+    after do
+      Kernel.send :remove_const, const_name
+    end
+
+    let(:const_name) { 'AppSettings' }
 
     it 'should not raise an error' do
       expect { subject.load! }.not_to raise_error
@@ -150,6 +202,19 @@ describe ElastiConf do
       it 'should load some configuration' do
         subject.load! env
         expect(AppSettings.some_config.str_key).to eql('2')
+      end
+    end
+
+    context 'when already initialized constant' do
+      before { Kernel.const_set(const_name, {}) }
+      
+      it 'should raise an error' do
+        expect { subject.load! }.to raise_error
+      end
+
+      it 'should not raise an error' do
+        subject.raise_if_already_initialized_constant = false
+        expect { subject.load! }.not_to raise_error
       end
     end
   end

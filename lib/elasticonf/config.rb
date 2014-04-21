@@ -5,7 +5,12 @@ module ElastiConf
     end
 
     def reset_config!
-      %w(config_root config_file const_name).each do |v|
+      %w(
+        config_root
+        config_file
+        const_name
+        raise_if_already_initialized_constant
+      ).each do |v|
         instance_variable_set "@#{v}", nil
       end
     end
@@ -41,6 +46,17 @@ module ElastiConf
         raise ArgumentError, "String or Symbol expected #{value.class} given"
       end
       @const_name = value.to_s
+    end
+
+    def raise_if_already_initialized_constant
+      @raise_if_already_initialized_constant.nil? ? true : @raise_if_already_initialized_constant
+    end
+
+    def raise_if_already_initialized_constant=(value)
+      unless [TrueClass, FalseClass].include?(value.class)
+        raise ArgumentError, "TrueClass or FalseClass expected #{value.class} given"
+      end
+      @raise_if_already_initialized_constant = value
     end
   end
 end

@@ -29,7 +29,12 @@ module ElastiConf
       config = config.deep_merge(Loader[YAML.load_file(env_config_file)])
     end
     
-    Kernel.send(:remove_const, const_name) if Kernel.const_defined?(const_name)
+    if Kernel.const_defined?(const_name)
+      raise_if_already_initialized_constant ?
+        raise("Cannot set constant #{const_name} because it is already initialized") :
+        Kernel.send(:remove_const, const_name)
+    end
+    
     Kernel.const_set const_name, config
   end
 end
