@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    elasticonf (1.0.0.beta)
+    elasticonf (1.0.0)
       hashie (~> 2.1.0)
 
 GEM
