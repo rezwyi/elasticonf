@@ -1,4 +1,4 @@
-ElastiConf [![Build Status](https://travis-ci.org/rezwyi/elasticonf.svg?branch=master)](https://travis-ci.org/rezwyi/elasticonf)
+ElastiConf [![Build Status](https://travis-ci.org/rezwyi/elasticonf.svg?branch=master)](https://travis-ci.org/rezwyi/elasticonf) [![Dependency Status](https://gemnasium.com/rezwyi/elasticonf.svg)](https://gemnasium.com/rezwyi/elasticonf)
 ==========
 
 Powerfull and flexible application config solution worked in any ruby program. No clases definition, no dependencies. It just works!
