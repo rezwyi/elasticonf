@@ -8,7 +8,7 @@ Powerfull and flexible application config solution worked in any ruby program. N
 First add the following lines to your application `Gemfile`:
 
 ``` ruby
-gem 'elasticonf', '~> 1.0.0.beta'
+gem 'elasticonf', '~> 1.0.0'
 ```
 
 Then run `bundle install` to update your's gems bundle.
@@ -28,7 +28,7 @@ Run this commands in terminal:
 0. `cd some/path`
 0. `git clone git@github.com:rezwyi/elasticonf.git`
 0. `cd elasticonf/`
-0. `bin/rspec`
+0. `bin/rake`
 
 ## Versioning
 
