@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     elasticonf (1.0.0.beta)
-      hashie
+      hashie (~> 2.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -25,6 +25,6 @@ PLATFORMS
 
 DEPENDENCIES
   elasticonf!
-  rake
-  rspec
-  yard
+  rake (~> 10.3.0)
+  rspec (~> 2.14.0)
+  yard (~> 0.8.0)

@@ -17,9 +17,11 @@ Gem::Specification.new do |s|
   s.files = `git ls-files`.split("\n")
   s.require_paths = ['lib']
 
-  s.add_dependency 'hashie'
+  s.required_ruby_version = '>= 1.9'
 
-  s.add_development_dependency 'rake'
-  s.add_development_dependency 'rspec'
-  s.add_development_dependency 'yard'
+  s.add_dependency 'hashie', '~> 2.1.0'
+
+  s.add_development_dependency 'rake', '~> 10.3.0'
+  s.add_development_dependency 'rspec', '~> 2.14.0'
+  s.add_development_dependency 'yard', '~> 0.8.0'
 end
