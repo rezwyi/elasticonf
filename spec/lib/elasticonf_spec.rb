@@ -217,5 +217,52 @@ describe ElastiConf do
         expect { subject.load! }.not_to raise_error
       end
     end
+
+    context 'when .local file present' do
+      let(:config_file) { subject.config_root.join('application.yml') }
+      let(:local_config_file) { subject.config_root.join('application.local.yml') }
+      
+      before do
+        YAML::load_file(config_file).tap do |config|
+          config['some_config']['str_key'] = 'local'
+          config['some_config'].delete('int_key')
+          File.open(local_config_file, 'w') { |f| f.write config.to_yaml }
+        end
+      end
+
+      after { FileUtils.rm(local_config_file) }
+
+      it 'should not raise an error' do
+        expect { subject.load! }.not_to raise_error
+      end
+
+      it 'should load missing values from config file' do
+        subject.load!
+        expect(AppSettings.some_config.int_key).to eql(1)
+      end
+      
+      it 'should override values from config file' do
+        subject.load!
+        expect(AppSettings.some_config.str_key).to eql('local')
+      end
+
+      context 'and some env given' do
+        let(:env) { :test }
+
+        it 'should not raise an error' do
+          expect { subject.load!(env) }.not_to raise_error
+        end
+
+        it 'should load missing values from config file' do
+          subject.load! env
+          expect(AppSettings.some_config.int_key).to eql(2)
+        end
+
+        it 'should override values from config file' do
+          subject.load! env
+          expect(AppSettings.some_config.str_key).to eql('local')
+        end
+      end
+    end
   end
 end
