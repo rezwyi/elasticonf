@@ -2,6 +2,7 @@ module ElastiConf
   class Config
     def reset_config!
       %w(
+        env
         config_root
         config_file
         const_name
@@ -9,6 +10,17 @@ module ElastiConf
       ).each do |v|
         instance_variable_set "@#{v}", nil
       end
+    end
+    
+    def env
+      @env ||= 'development'
+    end
+
+    def env=(value)
+      unless [String, Symbol].include?(value.class)
+        raise ArgumentError, "String or Symbol expected #{value.class} given"
+      end
+      @env = value.to_s
     end
 
     def config_root

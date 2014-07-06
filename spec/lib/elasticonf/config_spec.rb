@@ -3,6 +3,7 @@ require 'spec_helper'
 describe ElastiConf::Config do
   describe '#reset_config!' do
     before do
+      subject.env = :test
       subject.config_root = '/configuration'
       subject.config_file = 'application'
       subject.const_name = 'AppSettings'
@@ -10,13 +11,36 @@ describe ElastiConf::Config do
       
       subject.reset_config!
     end
-
+    
+    its(:env) { should eql('development') }
     its(:config_file) { should eql('config') }
     its(:const_name) { should eql('Settings') }
     its(:raise_if_already_initialized_constant) { should be_true }
 
     it 'should raise an error' do
       expect { subject.config_root }.to raise_error
+    end
+  end
+
+  describe '#env' do
+    its(:env) { should eql('development') }
+
+    it 'should return some value' do
+      expect { subject.env = :test }.to change(subject, :env).to('test')
+    end
+
+    context 'when wrong argument given' do
+      it 'should raise an error' do
+        expect { subject.env = -> {} }.to raise_error
+      end
+
+      it 'should raise an error' do
+        expect { subject.env = {} }.to raise_error
+      end
+
+      it 'should raise an error' do
+        expect { subject.env = [] }.to raise_error
+      end
     end
   end
 

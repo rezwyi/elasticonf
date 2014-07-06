@@ -71,7 +71,7 @@ describe ElastiConf do
       expect(AppSettings.some_config.str_key).to eql('1')
     end
 
-    context 'when some env given' do
+    context 'when some env given (as argument)' do
       let(:env) { :test }
       
       it 'should not raise an error' do
@@ -85,6 +85,24 @@ describe ElastiConf do
 
       it 'should load some configuration' do
         subject.load! env
+        expect(AppSettings.some_config.str_key).to eql('2')
+      end
+    end
+
+    context 'and some env given (through config.env)' do
+      before { subject.config.env = :test }
+
+      it 'should not raise an error' do
+        expect { subject.load! }.not_to raise_error
+      end
+
+      it 'should load missing values from config file' do
+        subject.load!
+        expect(AppSettings.some_config.int_key).to eql(2)
+      end
+
+      it 'should override values from config file' do
+        subject.load!
         expect(AppSettings.some_config.str_key).to eql('2')
       end
     end
@@ -130,7 +148,7 @@ describe ElastiConf do
         expect(AppSettings.some_config.str_key).to eql('local')
       end
 
-      context 'and some env given' do
+      context 'and some env given (as argument)' do
         let(:env) { :test }
 
         it 'should not raise an error' do
@@ -147,6 +165,45 @@ describe ElastiConf do
           expect(AppSettings.some_config.str_key).to eql('local')
         end
       end
+
+      context 'and some env given (through config.env)' do
+        before { subject.config.env = :test }
+
+        it 'should not raise an error' do
+          expect { subject.load! }.not_to raise_error
+        end
+
+        it 'should load missing values from config file' do
+          subject.load!
+          expect(AppSettings.some_config.int_key).to eql(2)
+        end
+
+        it 'should override values from config file' do
+          subject.load!
+          expect(AppSettings.some_config.str_key).to eql('local')
+        end
+      end
+    end
+  end
+
+  describe '#configure_and_load!' do
+    before { ElastiConf.stub(:load!).and_return(true) }
+    
+    let(:config_block) do
+      Proc.new do |config|
+        config.config_root = subject.root.join('spec', 'fixtures')
+        config.raise_if_already_initialized_constant = false
+      end
+    end
+    
+    it 'should call configure' do
+      subject.should_receive :configure
+      subject.configure_and_load! &config_block
+    end
+
+    it 'should call load' do
+      subject.should_receive :load!
+      subject.configure_and_load! &config_block
     end
   end
 end

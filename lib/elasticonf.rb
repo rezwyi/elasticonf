@@ -22,18 +22,16 @@ module ElastiConf
 
   def load!(env = nil)
   	config_file = config.config_root.join(config.config_file + '.yml')
+    config.env = env if env
 
     unless File.exists?(config_file)
       raise "Config file #{config_file} not found. Cannot continue"
     end
 
     loader = Loader[YAML.load_file(config_file)]
-
-    env_config_file = env ?
-      config.config_root.join(config.config_file, "#{env}.yml") :
-      nil
-
-    if env_config_file && File.exists?(env_config_file)
+    
+    env_config_file = config.config_root.join(config.config_file, "#{config.env}.yml")
+    if File.exists?(env_config_file)
       loader = loader.deep_merge(Loader[YAML.load_file(env_config_file)])
     end
 
@@ -49,5 +47,10 @@ module ElastiConf
     end
     
     Kernel.const_set config.const_name, loader
+  end
+
+  def configure_and_load!
+    configure { |config| yield(config) }
+    load!
   end
 end
