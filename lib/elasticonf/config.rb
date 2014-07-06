@@ -1,9 +1,5 @@
 module ElastiConf
-  module Config
-    def configure
-      yield self
-    end
-
+  class Config
     def reset_config!
       %w(
         config_root
@@ -16,14 +12,14 @@ module ElastiConf
     end
 
     def config_root
-      @config_root ||= raise(ArgumentError, 'You must first specify config root')
+      @config_root ||= raise(ArgumentError, 'You must specify config_root option first')
     end
 
     def config_root=(value)
       unless [String, Symbol, Pathname].include?(value.class)
-        raise ArgumentError, "String or Pathname expected #{value.class} given"
+        raise ArgumentError, "String or Symbol or Pathname expected #{value.class} given"
       end
-      @config_root = value.is_a?(String) ? Pathname.new(value.to_s) : value
+      @config_root = value.is_a?(Pathname) ? value : Pathname.new(value.to_s)
     end
 
     def config_file
@@ -34,7 +30,7 @@ module ElastiConf
       unless [String, Symbol].include?(value.class)
         raise ArgumentError, "String or Symbol expected #{value.class} given"
       end
-      @config_file = value
+      @config_file = value.to_s
     end
 
     def const_name

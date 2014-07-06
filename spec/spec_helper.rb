@@ -13,5 +13,5 @@ RSpec.configure do |config|
   config.run_all_when_everything_filtered = true
 
   # After each test spec rollback configuration to its default state
-  config.after(:each) { ElastiConf.reset_config! }
+  config.after(:each) { ElastiConf.config.reset_config! }
 end
