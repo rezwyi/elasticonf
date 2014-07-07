@@ -28,6 +28,7 @@ Run this commands in terminal:
 0. `cd some/path`
 0. `git clone git@github.com:rezwyi/elasticonf.git`
 0. `cd elasticonf/`
+0. `bundle install`
 0. `bin/rake`
 
 ## Versioning
