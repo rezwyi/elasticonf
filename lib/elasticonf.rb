@@ -5,7 +5,7 @@ require 'elasticonf/version'
 require 'elasticonf/config'
 require 'elasticonf/loader'
 
-module ElastiConf
+module Elasticonf
   module_function
 
   def root

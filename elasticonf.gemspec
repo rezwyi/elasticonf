@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.summary = 'Powerfull and flexible application config solution worked in any ruby program'
   s.description = s.summary
 
-  s.version  = ElastiConf::VERSION
+  s.version  = Elasticonf::VERSION
   s.platform  = Gem::Platform::RUBY
   
   s.authors = ['Sergey Rezvanov']

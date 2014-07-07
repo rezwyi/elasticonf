@@ -1,4 +1,4 @@
-module ElastiConf
+module Elasticonf
   class Loader < Hashie::Mash
     def get(key)
       unless [String, Symbol].include?(key.class)

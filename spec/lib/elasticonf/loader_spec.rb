@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe ElastiConf::Loader do
+describe Elasticonf::Loader do
   subject do
-    file = ElastiConf.root.join('spec', 'fixtures', 'config.yml')
+    file = Elasticonf.root.join('spec', 'fixtures', 'config.yml')
     described_class[YAML.load_file(file)]
   end
   

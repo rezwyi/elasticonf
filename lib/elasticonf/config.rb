@@ -1,4 +1,4 @@
-module ElastiConf
+module Elasticonf
   class Config
     def reset_config!
       %w(

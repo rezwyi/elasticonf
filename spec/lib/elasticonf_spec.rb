@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ElastiConf do
+describe Elasticonf do
   it { should be_a(Module) }
 
   describe '#root' do
@@ -11,7 +11,7 @@ describe ElastiConf do
 
   describe '#config' do
     it 'should instantiate ElastiConf::Config' do
-      expect(subject.config.class).to eql(ElastiConf::Config)
+      expect(subject.config.class).to eql(Elasticonf::Config)
     end
   end
 
@@ -187,7 +187,7 @@ describe ElastiConf do
   end
 
   describe '#configure_and_load!' do
-    before { ElastiConf.stub(:load!).and_return(true) }
+    before { Elasticonf.stub(:load!).and_return(true) }
     
     let(:config_block) do
       Proc.new do |config|

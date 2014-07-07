@@ -1,3 +1,3 @@
-module ElastiConf
+module Elasticonf
   VERSION = '1.1.0'
 end

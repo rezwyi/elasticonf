@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ElastiConf::Config do
+describe Elasticonf::Config do
   describe '#reset_config!' do
     before do
       subject.env = :test
