@@ -47,5 +47,5 @@ DEPENDENCIES
   coveralls
   elasticonf!
   rake (~> 10.3)
-  rspec (~> 2.14)
+  rspec (~> 2.14.0)
   yard (~> 0.8)
