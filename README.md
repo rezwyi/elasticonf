@@ -8,7 +8,7 @@ Powerfull and flexible application config solution worked in any ruby program. N
 First add the following lines to your application `Gemfile`:
 
 ``` ruby
-gem 'elasticonf', '~> 1.0.0'
+gem 'elasticonf', '~> 1.1.0'
 ```
 
 Then run `bundle install` to update your's gems bundle.
