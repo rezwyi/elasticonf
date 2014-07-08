@@ -35,7 +35,7 @@ module Elasticonf
     end
 
     def config_file
-      @config_file ||= 'config'
+      @config_file ||= 'settings'
     end
 
     def config_file=(value)

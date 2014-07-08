@@ -13,7 +13,7 @@ describe Elasticonf::Config do
     end
     
     its(:env) { should eql('development') }
-    its(:config_file) { should eql('config') }
+    its(:config_file) { should eql('settings') }
     its(:const_name) { should eql('Settings') }
     its(:raise_if_already_initialized_constant) { should be_true }
 
@@ -70,7 +70,7 @@ describe Elasticonf::Config do
   end
 
   describe '#config_file' do
-    its(:config_file) { should eql('config') }
+    its(:config_file) { should eql('settings') }
 
     it 'should return some value' do
       expect {
