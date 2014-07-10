@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     elasticonf (1.1.2)
-      hashie (~> 3.1)
+      hashie (>= 2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -15,12 +15,14 @@ GEM
       thor
     diff-lcs (1.2.5)
     docile (1.1.5)
-    hashie (3.1.0)
+    hashie (3.2.0)
     mime-types (2.3)
     multi_json (1.10.1)
+    netrc (0.7.7)
     rake (10.3.2)
-    rest-client (1.6.7)
-      mime-types (>= 1.16)
+    rest-client (1.7.1)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
