@@ -49,6 +49,13 @@ module Elasticonf
     Kernel.const_set config.const_name, loader
   end
 
+  def reload!
+    if Kernel.const_defined?(config.const_name)
+      Kernel.send :remove_const, config.const_name
+    end
+    load!
+  end
+
   def configure_and_load!
     configure { |config| yield(config) }
     load!

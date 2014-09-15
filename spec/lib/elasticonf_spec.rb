@@ -186,6 +186,35 @@ describe Elasticonf do
     end
   end
 
+  describe '#reload!' do
+    let(:config_file) { subject.config.config_root.join('application.yml') }
+    let(:bak_file) { subject.config.config_root.join('application.bak') }
+    
+    before do
+      subject.configure do |config|
+        config.config_root = subject.root.join('spec', 'fixtures')
+        config.config_file = 'application'
+        config.const_name = 'AppSettings'
+      end
+      
+      subject.load!
+
+      # Assume that our configuration has been changed since we have already
+      # loaded it
+      YAML::load_file(config_file).tap do |config|
+        FileUtils.mv config_file, bak_file
+        config['some_config']['int_key'] = 2
+        File.open(config_file, 'w') { |f| f.write config.to_yaml }
+      end
+    end
+
+    after { FileUtils.mv(bak_file, config_file) }
+
+    it 'should reload configuration' do
+      expect { subject.reload! }.to change { AppSettings.some_config.int_key }.from(1).to(2)
+    end
+  end
+
   describe '#configure_and_load!' do
     before { Elasticonf.stub(:load!).and_return(true) }
     
