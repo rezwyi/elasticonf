@@ -8,6 +8,9 @@ require 'elasticonf/loader'
 module Elasticonf
   module_function
 
+  # Returns the root directory of the project.
+  #
+  # @return [Pathname]
   def root
     @root ||= Pathname.new(File.expand_path(File.join(File.dirname(__FILE__), '..')))
   end
