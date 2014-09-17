@@ -1,2 +1,6 @@
 --main README.md
+--protected
 --no-private
+--embed-mixin ClassMethods
+-
+LICENSE
