@@ -15,6 +15,9 @@ module Elasticonf
     @root ||= Pathname.new(File.expand_path(File.join(File.dirname(__FILE__), '..')))
   end
 
+  # Instantiates configuration of the project.
+  #
+  # @return [Config]
   def config
     @config ||= Config.new
   end
