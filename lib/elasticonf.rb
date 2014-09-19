@@ -22,6 +22,7 @@ module Elasticonf
     @config ||= Config.new
   end
 
+  # Yields the config instance to setup the Elasticonf environment.
   def configure
     yield config
   end
