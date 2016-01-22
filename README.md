@@ -19,7 +19,11 @@ Will be available soon.
 
 ## Documentation
 
-Will be available soon.
+Run this commands in terminal:
+
+0. `cd path/to/elasticonf/repo`
+0. `bin/yard server`
+0. Go to [http://localhost:8808](http://localhost:8808) (by default) in your favorite browser
 
 ## Testing
 
