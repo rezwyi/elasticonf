@@ -5,6 +5,8 @@ Elasticonf [![Build Status](https://travis-ci.org/rezwyi/elasticonf.svg?branch=m
 
 <br />
 
+Powerfull and flexible application config solution worked in any ruby program. No clases definition, no dependencies. It just works!
+
 ## Installation
 
 First add the following lines to your application `Gemfile`:
