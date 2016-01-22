@@ -19,3 +19,6 @@ matrix:
 branches:
   only:
     - master
+
+before_install:
+  - gem install bundler
