@@ -1,4 +1,4 @@
-<img align="left" src="https://photos-6.dropbox.com/t/2/AAAJ8dCuxSMpf06T7f7Eo5h0jPtb_R9o0-dwEyn4ORQjSw/12/11845683/png/32x32/3/1497430800/0/2/ec-logo-no-text-small.png/ELz85wgYzhwgBygH/XxXPyQZlzja17O87mjcAkHucJQ7ZHWWgp31HGl_Koes?dl=0&size=1600x1200&size_mode=3"></img>
+<img align="left" src="/logo.png?raw=true"></img>
 
 Elasticonf [![Build Status](https://travis-ci.org/rezwyi/elasticonf.svg?branch=master)](https://travis-ci.org/rezwyi/elasticonf) [![Dependency Status](https://gemnasium.com/rezwyi/elasticonf.svg)](https://gemnasium.com/rezwyi/elasticonf) [![Coverage Status](https://img.shields.io/coveralls/rezwyi/elasticonf.svg)](https://coveralls.io/r/rezwyi/elasticonf)
 ==========
