@@ -7,11 +7,15 @@ Elasticonf [![Build Status](https://travis-ci.org/rezwyi/elasticonf.svg?branch=m
 
 Powerfull and flexible application config solution worked in any ruby program. No clases definition, no dependencies. It just works!
 
+## Prerequisites
+
+You need to have Ruby 2.0 or higher installed on your system.
+
 ## Installation
 
 First add the following lines to your application `Gemfile`:
 
-``` ruby
+```ruby
 gem 'elasticonf', '~> 1.1.3'
 ```
 
