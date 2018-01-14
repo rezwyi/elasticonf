@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
 
   s.version  = Elasticonf::VERSION
   s.platform  = Gem::Platform::RUBY
-  
+
   s.authors = ['Sergey Rezvanov']
   s.email = ['sergey@rezvanov.info']
   s.homepage = 'https://github.com/rezwyi/elasticonf'

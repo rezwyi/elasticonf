@@ -11,7 +11,7 @@ module Elasticonf
         instance_variable_set "@#{v}", nil
       end
     end
-    
+
     def env
       @env ||= 'development'
     end

@@ -8,10 +8,10 @@ describe Elasticonf::Config do
       subject.config_file = 'application'
       subject.const_name = 'AppSettings'
       subject.raise_if_already_initialized_constant = false
-      
+
       subject.reset_config!
     end
-    
+
     its(:env) { should eql('development') }
     its(:config_file) { should eql('settings') }
     its(:const_name) { should eql('Settings') }
@@ -144,7 +144,7 @@ describe Elasticonf::Config do
           subject.raise_if_already_initialized_constant = :some_symbol
         }.to raise_error
       end
-      
+
       it 'should raise an error' do
         expect {
           subject.raise_if_already_initialized_constant = -> {}

@@ -73,7 +73,7 @@ describe Elasticonf do
 
     context 'when some env given (as argument)' do
       let(:env) { :test }
-      
+
       it 'should not raise an error' do
         expect { subject.load!(env) }.not_to raise_error
       end
@@ -109,7 +109,7 @@ describe Elasticonf do
 
     context 'when already initialized constant' do
       before { Kernel.const_set(const_name, {}) }
-      
+
       it 'should raise an error' do
         expect { subject.load! }.to raise_error
       end
@@ -123,7 +123,7 @@ describe Elasticonf do
     context 'when .local file present' do
       let(:config_file) { subject.config.config_root.join('application.yml') }
       let(:local_config_file) { subject.config.config_root.join('application.local.yml') }
-      
+
       before do
         YAML::load_file(config_file).tap do |config|
           config['some_config']['str_key'] = 'local'
@@ -142,7 +142,7 @@ describe Elasticonf do
         subject.load!
         expect(AppSettings.some_config.int_key).to eql(1)
       end
-      
+
       it 'should override values from config file' do
         subject.load!
         expect(AppSettings.some_config.str_key).to eql('local')
@@ -189,14 +189,14 @@ describe Elasticonf do
   describe '#reload!' do
     let(:config_file) { subject.config.config_root.join('application.yml') }
     let(:bak_file) { subject.config.config_root.join('application.bak') }
-    
+
     before do
       subject.configure do |config|
         config.config_root = subject.root.join('spec', 'fixtures')
         config.config_file = 'application'
         config.const_name = 'AppSettings'
       end
-      
+
       subject.load!
 
       # Assume that our configuration has been changed since we have already
@@ -217,14 +217,14 @@ describe Elasticonf do
 
   describe '#configure_and_load!' do
     before { Elasticonf.stub(:load!).and_return(true) }
-    
+
     let(:config_block) do
       Proc.new do |config|
         config.config_root = subject.root.join('spec', 'fixtures')
         config.raise_if_already_initialized_constant = false
       end
     end
-    
+
     it 'should call configure' do
       subject.should_receive :configure
       subject.configure_and_load! &config_block
