@@ -16,7 +16,7 @@ You need to have Ruby 2.0 or higher installed on your system.
 First add the following lines to your application `Gemfile`:
 
 ```ruby
-gem 'elasticonf', '~> 1.1.4'
+gem 'elasticonf', '~> 1.1.5'
 ```
 
 Then run `bundle install` to update your's gems bundle.

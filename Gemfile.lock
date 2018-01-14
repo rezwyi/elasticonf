@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    elasticonf (1.1.4)
+    elasticonf (1.1.5)
       hashie (~> 3.0)
       semantic (> 0)
 
