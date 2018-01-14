@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 1.9'
 
   s.add_dependency 'hashie', '>= 2.0'
+  s.add_dependency 'semantic'
 
   s.add_development_dependency 'rake', '~> 10.3'
   s.add_development_dependency 'rspec', '~> 2.14.0'
