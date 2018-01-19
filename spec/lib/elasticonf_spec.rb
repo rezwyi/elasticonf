@@ -4,8 +4,8 @@ describe Elasticonf do
   it { should be_a(Module) }
 
   describe '#root' do
-    its(:root) do
-      should eql(Pathname.new(File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))))
+    it 'should return default value' do
+      expect(subject.root).to eql(Pathname.new(File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))))
     end
   end
 
@@ -38,11 +38,13 @@ describe Elasticonf do
     end
 
     it 'should return false' do
-      expect(subject.config.raise_if_already_initialized_constant).to eql(false)
+      expect(subject.config.raise_if_already_initialized_constant).to be_falsy
     end
   end
 
   describe '#load!' do
+    let(:const_name) { 'AppSettings' }
+
     before do
       subject.configure do |config|
         config.config_root = subject.root.join('spec', 'fixtures')
@@ -54,8 +56,6 @@ describe Elasticonf do
     after do
       Kernel.send :remove_const, const_name
     end
-
-    let(:const_name) { 'AppSettings' }
 
     it 'should not raise an error' do
       expect { subject.load! }.not_to raise_error
@@ -71,7 +71,7 @@ describe Elasticonf do
       expect(AppSettings.some_config.str_key).to eql('1')
     end
 
-    context 'when some env given (as argument)' do
+    context 'when some env given as an argument' do
       let(:env) { :test }
 
       it 'should not raise an error' do
@@ -89,7 +89,7 @@ describe Elasticonf do
       end
     end
 
-    context 'and some env given (through config.env)' do
+    context 'and some env given using config.env' do
       before { subject.config.env = :test }
 
       it 'should not raise an error' do
@@ -111,7 +111,7 @@ describe Elasticonf do
       before { Kernel.const_set(const_name, {}) }
 
       it 'should raise an error' do
-        expect { subject.load! }.to raise_error
+        expect { subject.load! }.to raise_error(Elasticonf::LoadError)
       end
 
       it 'should not raise an error' do
@@ -199,8 +199,6 @@ describe Elasticonf do
 
       subject.load!
 
-      # Assume that our configuration has been changed since we have already
-      # loaded it
       YAML::load_file(config_file).tap do |config|
         FileUtils.mv config_file, bak_file
         config['some_config']['int_key'] = 2
@@ -216,7 +214,7 @@ describe Elasticonf do
   end
 
   describe '#configure_and_load!' do
-    before { Elasticonf.stub(:load!).and_return(true) }
+    before { allow(Elasticonf).to receive(:load!).and_return(true) }
 
     let(:config_block) do
       Proc.new do |config|
@@ -226,12 +224,12 @@ describe Elasticonf do
     end
 
     it 'should call configure' do
-      subject.should_receive :configure
+      expect(subject).to receive(:configure)
       subject.configure_and_load! &config_block
     end
 
     it 'should call load' do
-      subject.should_receive :load!
+      expect(subject).to receive(:load!)
       subject.configure_and_load! &config_block
     end
   end
