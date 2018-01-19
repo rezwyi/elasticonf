@@ -111,7 +111,7 @@ describe Elasticonf do
       before { Kernel.const_set(const_name, {}) }
 
       it 'should raise an error' do
-        expect { subject.load! }.to raise_error
+        expect { subject.load! }.to raise_error(Elasticonf::LoadError)
       end
 
       it 'should not raise an error' do

@@ -6,6 +6,9 @@ require 'elasticonf/config'
 require 'elasticonf/loader'
 
 module Elasticonf
+  class Error < StandardError; end
+  class LoadError < Error; end
+
   module_function
 
   def root
@@ -25,7 +28,7 @@ module Elasticonf
     config.env = env if env
 
     unless File.exists?(config_file)
-      raise "Config file #{config_file} not found. Cannot continue"
+      raise LoadError, "Config file #{config_file} not found. Cannot continue"
     end
 
     loader = Loader[YAML.load_file(config_file)]
@@ -41,9 +44,11 @@ module Elasticonf
     end
 
     if Kernel.const_defined?(config.const_name)
-      config.raise_if_already_initialized_constant ?
-        raise("Cannot set constant #{config.const_name} because it is already initialized") :
-        Kernel.send(:remove_const, config.const_name)
+      if config.raise_if_already_initialized_constant
+        raise LoadError, "Cannot set constant #{config.const_name} because it is already initialized"
+      else
+        Kernel.send :remove_const, config.const_name
+      end
     end
 
     Kernel.const_set config.const_name, loader

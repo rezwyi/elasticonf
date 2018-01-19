@@ -21,7 +21,7 @@ describe Elasticonf::Config do
     end
 
     it 'should raise an error' do
-      expect { subject.config_root }.to raise_error
+      expect { subject.config_root }.to raise_error(ArgumentError)
     end
   end
 
@@ -36,22 +36,22 @@ describe Elasticonf::Config do
 
     context 'when wrong argument given' do
       it 'should raise an error' do
-        expect { subject.env = -> {} }.to raise_error
+        expect { subject.env = -> {} }.to raise_error(ArgumentError)
       end
 
       it 'should raise an error' do
-        expect { subject.env = {} }.to raise_error
+        expect { subject.env = {} }.to raise_error(ArgumentError)
       end
 
       it 'should raise an error' do
-        expect { subject.env = [] }.to raise_error
+        expect { subject.env = [] }.to raise_error(ArgumentError)
       end
     end
   end
 
   describe '#config_root' do
     it 'should raise an error' do
-      expect { subject.config_root }.to raise_error
+      expect { subject.config_root }.to raise_error(ArgumentError)
     end
 
     it 'should set new config_root value' do
@@ -61,15 +61,15 @@ describe Elasticonf::Config do
 
     context 'when wrong argument given' do
       it 'should raise an error' do
-        expect { subject.config_root = -> {} }.to raise_error
+        expect { subject.config_root = -> {} }.to raise_error(ArgumentError)
       end
 
       it 'should raise an error' do
-        expect { subject.config_root = {} }.to raise_error
+        expect { subject.config_root = {} }.to raise_error(ArgumentError)
       end
 
       it 'should raise an error' do
-        expect { subject.config_root = [] }.to raise_error
+        expect { subject.config_root = [] }.to raise_error(ArgumentError)
       end
     end
   end
@@ -87,15 +87,15 @@ describe Elasticonf::Config do
 
     context 'when wrong argument given' do
       it 'should raise an error' do
-        expect { subject.config_file = -> {} }.to raise_error
+        expect { subject.config_file = -> {} }.to raise_error(ArgumentError)
       end
 
       it 'should raise an error' do
-        expect { subject.config_file = {} }.to raise_error
+        expect { subject.config_file = {} }.to raise_error(ArgumentError)
       end
 
       it 'should raise an error' do
-        expect { subject.config_file = [] }.to raise_error
+        expect { subject.config_file = [] }.to raise_error(ArgumentError)
       end
     end
   end
@@ -119,15 +119,15 @@ describe Elasticonf::Config do
 
     context 'when wrong argument given' do
       it 'should raise an error' do
-        expect { subject.const_name = -> {} }.to raise_error
+        expect { subject.const_name = -> {} }.to raise_error(ArgumentError)
       end
 
       it 'should raise an error' do
-        expect { subject.const_name = {} }.to raise_error
+        expect { subject.const_name = {} }.to raise_error(ArgumentError)
       end
 
       it 'should raise an error' do
-        expect { subject.const_name = [] }.to raise_error
+        expect { subject.const_name = [] }.to raise_error(ArgumentError)
       end
     end
   end
@@ -147,31 +147,31 @@ describe Elasticonf::Config do
       it 'should raise an error' do
         expect {
           subject.raise_if_already_initialized_constant = 'some_string'
-        }.to raise_error
+        }.to raise_error(ArgumentError)
       end
 
       it 'should raise an error' do
         expect {
           subject.raise_if_already_initialized_constant = :some_symbol
-        }.to raise_error
+        }.to raise_error(ArgumentError)
       end
 
       it 'should raise an error' do
         expect {
           subject.raise_if_already_initialized_constant = -> {}
-        }.to raise_error
+        }.to raise_error(ArgumentError)
       end
 
       it 'should raise an error' do
         expect {
           subject.raise_if_already_initialized_constant = {}
-        }.to raise_error
+        }.to raise_error(ArgumentError)
       end
 
       it 'should raise an error' do
         expect {
           subject.raise_if_already_initialized_constant = []
-        }.to raise_error
+        }.to raise_error(ArgumentError)
       end
     end
   end

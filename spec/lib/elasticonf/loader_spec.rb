@@ -25,19 +25,19 @@ describe Elasticonf::Loader do
 
     context 'when wrong argument given' do
       it 'should raise an error' do
-        expect { subject.get }.to raise_error
+        expect { subject.get }.to raise_error(ArgumentError)
       end
 
       it 'should raise an error' do
-        expect { subject.get({}) }.to raise_error
+        expect { subject.get({}) }.to raise_error(ArgumentError)
       end
 
       it 'should raise an error' do
-        expect { subject.get([]) }.to raise_error
+        expect { subject.get([]) }.to raise_error(ArgumentError)
       end
 
       it 'should raise an error' do
-        expect { subject.get(false) }.to raise_error
+        expect { subject.get(false) }.to raise_error(ArgumentError)
       end
     end
   end
