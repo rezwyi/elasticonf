@@ -7,7 +7,7 @@ describe Elasticonf::Loader do
   end
 
   it 'should be inherited from Hashie::Mash' do
-    subject.should be_kind_of(Hashie::Mash)
+    expect(subject).to be_kind_of(Hashie::Mash)
   end
 
   describe '#get' do
